@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- basic page needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Abdulgafar Yusuf</title>
+	<meta name="description" content="">  
+	<meta name="author" content="">
+
+   <!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ 	<!-- CSS
+   ================================================== -->
+   <link rel="stylesheet" href="css/base.css">  
+   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/vendor.css">     
+
+   <!-- script
+   ================================================== -->   
+	<script src="js/modernizr.js"></script>
+	<script src="js/pace.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1147.0/aws-sdk.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+   <!-- favicons
+	================================================== -->
+	<link rel="icon" type="image/png" href="favicon.png">
+
+   <!-- Counter and AWS SDK
+	================================================== -->
+	<script>
+        // Initialize AWS SDK
+        AWS.config.update({
+            region: 'eu-north-1',
+            accessKeyId: 'AKIA5JN6KY22ESIUXUHU',
+            secretAccessKey: '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'
+        });
+
+        // Create DynamoDB Document Client
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
+
+        // Specify your DynamoDB table name and key
+        const tableName = 'Resume';
+        const primaryKey = 'visitorCount';  // Update the key here
+        
+        // Function to update and display the visitor count
+async function updateVisitorCount() {
+    try {
+        // Retrieve the current count from DynamoDB
+        const data = await dynamodb.get({
+            TableName: tableName,
+            Key: { visitorCount: '1' }  // Update the key here
+        }).promise();
+
+        console.log("Response from DynamoDB:", data);
+
+        // Check if an item was found
+        if (data.Item) {
+            const count = data.Item.count + 1;
+
+            // Update the count in DynamoDB
+            await dynamodb.put({
+                TableName: tableName,
+                Item: { visitorCount: '1', count: count }  // Update the key here
+            }).promise();
+
+            // Display the count in the element with the id "visitor-count"
+            $("#visitor-count").text(count);
+
+            console.log("Item updated successfully.");
+        } else {
+            // Handle the case where the item was not found
+            console.log("Item not found. You may want to handle this case accordingly.");
+        }
+    } catch (error) {
+        console.error("Error updating count:", error);
+    }
+}
+
+
+        // Call the updateVisitorCount function when the page is loaded
+        $(document).ready(updateVisitorCount);
+    </script>
+
+</head>
+
+<body id="top">
+
+	<!-- header 
+   ================================================== -->
+   <header>   	
+   	<div class="row">
+
+   		<div class="top-bar">
+   			<a class="menu-toggle" href="#"><span>Menu</span></a>
+
+	   		<div class="logo">
+		         <a href="index.html">Quick Access</a>
+		      </div>		      
+
+		   	<nav id="main-nav-wrap">
+					<ul class="main-navigation">
+						<li class="current"><a class="smoothscroll"  href="#intro" title="">Home</a></li>
+						<li><a class="smoothscroll"  href="#about" title="">About</a></li>
+						<li><a class="smoothscroll"  href="#resume" title="">Resume</a></li>
+						<li><a class="smoothscroll"  href="#portfolio" title="">Portfolio</a></li>	
+					</ul>
+				</nav>    		
+   		</div> <!-- /top-bar --> 
+   		
+   	</div> <!-- /row --> 		
+   </header> <!-- /header -->
+
+	<!-- intro section
+   ================================================== -->
+   <section id="intro">   
+
+   	<div class="intro-overlay"></div>	
+
+   	<div class="intro-content">
+   		<div class="row">
+
+   			<div class="col-twelve">
+
+	   			<h5>Hello, </h5>
+	   			<h1>I'm Abdulgafar Yusuf.</h1>
+
+	   			<p class="intro-position">
+	   				<span>Software Engineer</span>
+	   				<span>DevOps and Cloud</span> 
+					<span>API Integration and Implementation Specialist</span> 
+	   			</p>
+
+	   			<a class="button stroke smoothscroll" href="#about" title="">More About Me</a>
+				   <p class="intro-position">PS: You are visitor number <span id="visitor-count">0</span></p>
+
+	   		</div>  
+   			
+   		</div>   		 		
+   	</div> <!-- /intro-content --> 
+
+   	<ul class="intro-social">        
+         
+         <li><a href="https://github.com/abdulxs"><i class="fa fa-github"></i></a></li>
+         <li><a href="https://www.linkedin.com/in/abdulgafar-yusuf-815a18157"><i class="fa fa-linkedin"></i></a></li>
+		 <li><a href="mailto:yusufabdulgafar123@gmail.com"><i class="fa fa-envelope"></i></a></li>
+      </ul> <!-- /intro-social -->      	
+
+   </section> <!-- /intro -->
+
+
+   <!-- about section
+   ================================================== -->
+   <section id="about">  
+
+   	<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>About</h5>
+   			<h1>Let me introduce myself.</h1>
+   				<p class="lead">I am an application implementation specialist with a skillset honed in development and operations. I am currently pursuing a master's degree in Computer Science. Fun fact: I am on a mission to find the intersection of AI and football. I am currently being led on by the field of eye tracking and it's been eye-opening :)</p>
+   		 			
+   		</div>   		
+   	</div> <!-- /section-intro -->
+
+   	<div class="row about-content">
+
+   		<div class="col-six tab-full">
+
+   			<h3>Certifications</h3>
+   			
+   			<ul class="info-list">
+   				<li>
+   					<strong>AWS certified cloud practitioner</strong>
+					<span></span>
+					<strong>Lean Six sigma yellow belt</strong>
+					<span></span>
+					<strong>ITIL v4 Foundations</strong>
+					<span></span>
+					<strong>ICSI Certified network security specialist</strong>
+   					
+   				</li>
+
+   			</ul> <!-- /info-list -->
+
+   		</div>
+
+   		<div class="col-six tab-full">
+
+   			<h3>Skills</h3>
+   			
+				<ul class="info-list">
+				   <li>
+				   	<strong>Cloud</strong>
+					<span class="lead">AWS | Microsoft Azure</span>
+				   </li>
+				   <li>
+					<strong>Programming and Scripting</strong>
+					<span class="lead">Python | SQL | JavaScript | NodeJS | Shell | Bash</span>
+				   </li>
+				   <li>
+					<strong>Tools and Technologies</strong>
+					<span class="lead">Kubernetes | Terraform | Ansible | Linux | Git | Docker | Jenkins | ELK | Prometheus | Grafana </span>
+				   </li>
+				   <li>
+					<strong>APIs</strong>
+					<span class="lead">Postman | Swagger</span>
+				   </li>
+				   <li>
+					<strong>WEB</strong>
+					<span class="lead">HTML | CSS | Wordpress | React</span>
+				   </li>
+				   <li>
+					<strong>Others</strong>
+					<span class="lead">AI | ML | Electronic Funds Transfer Operations | Network and Cloud Security | Microsoft Office Suite </span>
+				   </li>
+      
+				</ul> <!-- /skill-bars -->		
+
+   		</div>
+
+   	</div>
+
+   	<div class="row button-section">
+   		<div class="col-twelve">
+			<a href="./Abdulgafar_Yusuf.pdf" download="Abdulgafar_Yusuf.pdf" title="Download CV" class="button button-primary">Download CV</a>
+
+   		</div>   		
+   	</div>
+
+   </section> <!-- /process-->    
+
+
+   <!-- resume Section
+   ================================================== -->
+	<section id="resume" class="grey-section">
+
+   	<div class="row resume-timeline">
+
+   		<div class="col-twelve resume-header">
+
+   			<h2>Work Experience</h2>
+
+   		</div> <!-- /resume-header -->
+
+   		<div class="col-twelve">
+
+   			<div class="timeline-wrap">
+
+   				<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-briefcase"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Operations Engineer</h3>
+	   					<p>October 2023 - Present</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>Interswitch Group</h4>
+	   					<p>Led pilot implementation of Batched-credit solution for agency-banking merchants, sourcing a new revenue stream for the company</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+	   			<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-briefcase"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Application Implementation Engineer</h3>
+	   					<p>September 2021 - August 2023</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>Interswitch Group</h4>
+	   					<p>Multiple MVP of the month recognition for closing the most projects in the Operational Value Stream (OVS) in 2022 and 2023.</p>
+						<p>Led implementation of Card issuing projects that contributed to 10% of business line revenue.</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+	   			<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-briefcase"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Backbone Intern</h3>
+	   					<p>March 2021 - September 2021</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>Interswitch Group</h4>
+	   					<p>Facilitated Process support using technologies such as SQL, Docker, Kubernetes etc. and monitoring tools such as Grafana, Kafka etc. across Group Service delivery, Core Operations and Shared Technology teams.</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+   			</div> <!-- /timeline-wrap -->   			
+
+   		</div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /resume-timeline -->
+   	
+   	<div class="row resume-timeline">
+
+   		<div class="col-twelve resume-header">
+
+   			<h2>Education</h2>
+
+   		</div> <!-- /resume-header -->
+
+   		<div class="col-twelve">
+
+   			<div class="timeline-wrap">
+
+   				<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-graduation-cap"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>MSc. Computer science</h3>
+	   					<p>September 2023 - Present</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>University of Eastern Finland</h4>
+	   					<p>Exploring research in eye tracking and how it can be leveraged in understanding and improving the technologies used in the game of football</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+	   			<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-graduation-cap"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Bsc. Computer science</h3>
+	   					<p>September 2015 - October 2019</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>University of Ilorin, Ilorin.</h4>
+	   					<p>Named among 50 Most Reputable Students by Communication and Information Sciences Students’ Association (CISSA)</p>
+						<p>Awarded Sportsman of the year by National Association of Computer Science Students (NACOSS)</p>
+						<p>Led the department football team to three gold medals in the 2018/19 academic session</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+
+   			</div> <!-- /timeline-wrap -->   			
+
+   		</div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /resume-timeline -->
+		
+	</section> <!-- /features -->
+
+
+	<!-- Portfolio Section
+   ================================================== -->
+	<section id="portfolio">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>Projects</h5>
+   			<h1>Check Out Some of My Works.</h1>
+
+   		</div>   		
+   	</div> <!-- /section-intro--> 
+
+   	<div class="row portfolio-content">
+
+   		<div class="col-twelve">
+
+   			<!-- portfolio-wrapper -->
+	         <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
+
+	         	<div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/liberty.jpg" alt="Liberty">
+	                  <a href="#modal-01" class="overlay">	                  	           
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+		     					       <h3 class="folio-title">The Cloud Resume Challenge</h3>	     					    
+		     					    	 <span class="folio-types">
+		     					       	  
+		     					       </span>
+		     					   </div>	                      	
+	                     </div>                    
+	                  </a>
+	               </div>	               
+	        		</div> <!-- /folio-item -->
+
+	        		<div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/shutterbug.jpg" alt="Shutterbug">
+	               	<a href="#modal-02" class="overlay">              		                  
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">Other DevOps Projects</h3>	     					    
+		     					    	<span class="folio-types">
+		     					       	  
+		     					      </span>		     		
+		     					   </div> 	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div>  <!-- /folio-item -->
+
+	            <!-- <div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/clouds.jpg"alt="Clouds">
+	                  <a href="#modal-03" class="overlay">             		                  
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">Clouds</h3>	     					    
+		     					    	<span class="folio-types">
+		     					       	  Web Design
+		     					      </span>		     		
+		     					   </div> 	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> --> <!-- /folio-item -->
+
+	            <!-- <div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/beetle.jpg" alt="Beetle">
+	                  <a href="#modal-04" class="overlay">                  	                 
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">Beetle</h3>	     					    
+		     					    	<span class="folio-types">
+		     					       	  Branding
+		     					      </span>		     		
+		     					   </div>  	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> -->    <!-- /folio-item -->     
+
+
+	            <!-- modal popups - begin
+	            ============================================================= -->
+	            <div id="modal-01" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/modals/m-liberty.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>The Cloud Resume Challenge - AWS</h4>		      
+					      <p>If you're reading this, it means you're scrolling through the frontend of this project. I wrote a blog all about it which you can find below. As well as the the link to the Github repo.</p>
+							<!-- /update this with link to Github repo!! -->
+					      <div class="categories"><a href=""> GO TO GITHUB</a></div>			               
+					   </div>
+
+			         <div class="link-box">
+						<!-- /update this with link to Blog!! -->
+			            <a href="http://www.behance.net">Go to Blog</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-01 -->
+
+				   <div id="modal-02" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/modals/m-shutterbug.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>Other DevOps Projects</h4>		      
+					      <p>here you can find a link to my Github to view other DevOps projects I have worked on.</p>
+		               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://github.com/abdulxs/DevOps-Projects">Go TO GITHUB</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-02 -->
+
+				   <div id="modal-03" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/modals/m-clouds.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>Clouds</h4>		      
+					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+					      <div class="categories">Web Design</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="http://www.behance.net">Details</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-03 -->
+
+				   <div id="modal-04" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/modals/m-beetle.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>Beetle</h4>		      
+					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+
+					      <div class="categories">Branding</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="http://www.behance.net">Details</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-04 -->
+
+				   <!-- modal popups - end
+	            ============================================================= -->
+
+	         </div> <!-- /portfolio-wrapper --> 
+
+   		</div>  <!-- /twelve -->   
+
+   	</div> <!-- /portfolio-content --> 
+		
+	</section> <!-- /portfolio --> 
+
+
+	
+
+	
+
+	
+   <!-- contact
+   ================================================== -->
+	<section id="contact">
+
+		
+   	</div> <!-- /section-intro -->
+
+   
+
+   	<!-- <div class="row contact-info">
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-pin"></i>
+   			</div>
+
+   			<h5>Where to find me</h5>
+
+   			<p>
+            1600 Amphitheatre Parkway<br>
+            Mountain View, CA<br>
+            94043 US
+            </p>
+
+   		</div>
+
+   		<div class="col-four tab-full collapse">
+
+   			<div class="icon">
+   				<i class="icon-mail"></i>
+   			</div>
+
+   			<h5>Email Me At</h5>
+
+   			<p>someone@kardswebsite.com<br>
+			   	info@kardswebsite.com			     
+			   </p>
+
+   		</div>
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-phone"></i>
+   			</div>
+
+   			<h5>Call Me At</h5>
+
+   			<p>Phone: (+63) 555 1212<br>
+			   	Mobile: (+63) 555 0100<br>
+			     	Fax: (+63) 555 0101
+			   </p>
+
+   		</div>
+   		
+   	</div> <!-- /contact-info -->
+		
+	<!--</section> /contact -->
+
+
+   <!-- footer
+   ================================================== -->
+
+   <footer>
+     	<div class="row">
+
+     		<div class="col-six tab-full pull-right social">
+
+     			<ul class="footer-social">        
+					<li><a href="https://github.com/abdulxs"><i class="fa fa-github"></i></a></li>
+					<li><a href="https://www.linkedin.com/in/abdulgafar-yusuf-815a18157"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="mailto:yusufabdulgafar123@gmail.com"><i class="fa fa-envelope"></i></a></li>
+			   </ul> 
+	      		
+	      </div>
+
+      	<div class="col-six tab-full">
+	      	<div class="copyright">
+		        	<span>© Copyright Kards 2016.</span> 
+		        	<span>Adapted by Abdulgafar</span>	         	
+		         </div>		                  
+	      	</div>
+
+	      	<div id="go-top">
+		         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+		      </div>
+
+      	</div> <!-- /row -->     	
+   </footer>  
+
+   <div id="preloader"> 
+    	<div id="loader"></div>
+   </div> 
+
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-2.1.3.min.js"></script>
+   <script src="js/plugins.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+
+</html>
