@@ -47,7 +47,7 @@
     async function updateVisitorCount() {
         try {
             // Retrieve the current count from DynamoDB using API Gateway
-            const response = await fetch('https://h3wlz9ifqf.execute-api.eu-north-1.amazonaws.com/Prod/', {
+            const response = await fetch('https://6kk5qw05q5.execute-api.eu-north-1.amazonaws.com/development/resumeFunction', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@
                 const count = data.Item.count + 1;
 
                 // Update the count in DynamoDB using API Gateway
-                await fetch('https://h3wlz9ifqf.execute-api.eu-north-1.amazonaws.com/Prod/', {
+                await fetch('https://6kk5qw05q5.execute-api.eu-north-1.amazonaws.com/development/resumeFunction', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
