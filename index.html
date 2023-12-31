@@ -33,63 +33,6 @@
 	================================================== -->
 	<link rel="icon" type="image/png" href="favicon.png">
 
-   <!-- Counter and AWS SDK
-	================================================== -->
-	<script>
-        // Initialize AWS SDK
-        AWS.config.update({
-            region: 'eu-north-1',
-            accessKeyId: 'AKIA5JN6KY22ESIUXUHU',
-            secretAccessKey: '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'
-        });
-
-        // Create DynamoDB Document Client
-        const dynamodb = new AWS.DynamoDB.DocumentClient();
-
-        // Specify your DynamoDB table name and key
-        const tableName = 'Resume';
-        const primaryKey = 'visitorCount';  // Update the key here
-        
-        // Function to update and display the visitor count
-async function updateVisitorCount() {
-    try {
-        // Retrieve the current count from DynamoDB
-        const data = await dynamodb.get({
-            TableName: tableName,
-            Key: { visitorCount: '1' }  // Update the key here
-        }).promise();
-
-        console.log("Response from DynamoDB:", data);
-
-        // Check if an item was found
-        if (data.Item) {
-            const count = data.Item.count + 1;
-
-            // Update the count in DynamoDB
-            await dynamodb.put({
-                TableName: tableName,
-                Item: { visitorCount: '1', count: count }  // Update the key here
-            }).promise();
-
-            // Display the count in the element with the id "visitor-count"
-            $("#visitor-count").text(count);
-
-            console.log("Item updated successfully.");
-        } else {
-            // Handle the case where the item was not found
-            console.log("Item not found. You may want to handle this case accordingly.");
-        }
-    } catch (error) {
-        console.error("Error updating count:", error);
-    }
-}
-
-
-        // Call the updateVisitorCount function when the page is loaded
-        $(document).ready(updateVisitorCount);
-    </script>
-
-
 </head>
 
 <body id="top">
@@ -643,6 +586,7 @@ async function updateVisitorCount() {
    <script src="js/jquery-2.1.3.min.js"></script>
    <script src="js/plugins.js"></script>
    <script src="js/main.js"></script>
+   <script src="js/index.js"></script>
 
 </body>
 
