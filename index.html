@@ -36,61 +36,58 @@
    <!-- Counter and AWS SDK
 	================================================== -->
 	<script>
-    // Create DynamoDB Document Client
-    const dynamodb = new AWS.DynamoDB.DocumentClient();
+        // Initialize AWS SDK
+        AWS.config.update({
+            region: 'eu-north-1',
+            accessKeyId: 'AKIA5JN6KY22ESIUXUHU',
+            secretAccessKey: '+EuhkCFa2JaZ1HFHVul+TgxMgd3Eqfl5fC5qdCKi'
+        });
 
-    // Specify your DynamoDB table name and key
-    const tableName = 'Resume';
-    const primaryKey = 'visitorCount';  // Update the key here
+        // Create DynamoDB Document Client
+        const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-    // Function to update and display the visitor count
-    async function updateVisitorCount() {
-        try {
-            // Retrieve the current count from DynamoDB using API Gateway
-            const response = await fetch('https://6kk5qw05q5.execute-api.eu-north-1.amazonaws.com/development/resumeFunction', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add any additional headers if needed
-                },
-            });
+        // Specify your DynamoDB table name and key
+        const tableName = 'Resume';
+        const primaryKey = 'visitorCount';  // Update the key here
+        
+        // Function to update and display the visitor count
+async function updateVisitorCount() {
+    try {
+        // Retrieve the current count from DynamoDB
+        const data = await dynamodb.get({
+            TableName: tableName,
+            Key: { visitorCount: '1' }  // Update the key here
+        }).promise();
 
-            const data = await response.json();
+        console.log("Response from DynamoDB:", data);
 
-            console.log("Response from DynamoDB via API Gateway:", data);
+        // Check if an item was found
+        if (data.Item) {
+            const count = data.Item.count + 1;
 
-            // Check if an item was found
-            if (data.Item) {
-                const count = data.Item.count + 1;
+            // Update the count in DynamoDB
+            await dynamodb.put({
+                TableName: tableName,
+                Item: { visitorCount: '1', count: count }  // Update the key here
+            }).promise();
 
-                // Update the count in DynamoDB using API Gateway
-                await fetch('https://6kk5qw05q5.execute-api.eu-north-1.amazonaws.com/development/resumeFunction', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        // Add any additional headers if needed
-                    },
-                    body: JSON.stringify({
-                        count: count,
-                    }),
-                });
+            // Display the count in the element with the id "visitor-count"
+            $("#visitor-count").text(count);
 
-                // Display the count in the element with the id "visitor-count"
-                $("#visitor-count").text(count);
-
-                console.log("Item updated successfully.");
-            } else {
-                // Handle the case where the item was not found
-                console.log("Item not found. You may want to handle this case accordingly.");
-            }
-        } catch (error) {
-            console.error("Error updating count:", error);
+            console.log("Item updated successfully.");
+        } else {
+            // Handle the case where the item was not found
+            console.log("Item not found. You may want to handle this case accordingly.");
         }
+    } catch (error) {
+        console.error("Error updating count:", error);
     }
+}
 
-    // Call the updateVisitorCount function when the page is loaded
-    $(document).ready(updateVisitorCount);
-</script>
+
+        // Call the updateVisitorCount function when the page is loaded
+        $(document).ready(updateVisitorCount);
+    </script>
 
 
 </head>
