@@ -9,4 +9,4 @@ Addition of gpg key to enable commit signing
 6. After key was generated, I configured it on git with `git config --global user.signingkey $(RSA key ID here)`
 7. Enabled signed gpg commits with `git config --global commit.gpgsign true`
 8. Enabled commit signing with GPG from vs code by going to `settings > gpg > Git: enable commit signing`
-9. 
+9. Test with commit from local
