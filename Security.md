@@ -9,4 +9,9 @@ Addition of gpg key to enable commit signing
 6. After key was generated, I configured it on git with `git config --global user.signingkey $(RSA key ID here)`
 7. Enabled signed gpg commits with `git config --global commit.gpgsign true`
 8. Enabled commit signing with GPG from vs code by going to `settings > gpg > Git: enable commit signing`
-9. Test with commit from local
+9. Add public GPG Key to Github profile
+10. Test with commit from local and validate from pull request that the `verified` tag is added
+11. ![image](https://github.com/abdulxs/Cloud-Resume-Challenge-Frontend/assets/18741380/eb85e272-dd20-4ed7-b7c7-e55d20a6e54a)
+
+
+
