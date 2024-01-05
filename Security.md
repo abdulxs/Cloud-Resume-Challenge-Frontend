@@ -1,5 +1,6 @@
 Steps taken to secure the software supply chain
-Addition of gpg key to enable commit signing
+
+**A. Addition of gpg key to enable commit signing**
 
 1. Downloaded GPG Suite
 2. Opened vs code terminal and in the directory of the local repository
@@ -13,5 +14,14 @@ Addition of gpg key to enable commit signing
 10. Test with commit from local and validate from pull request that the `verified` tag is added
 11. ![image](https://github.com/abdulxs/Cloud-Resume-Challenge-Frontend/assets/18741380/eb85e272-dd20-4ed7-b7c7-e55d20a6e54a)
 
+**B. Implementing status checks to ensure only signed commits are merged into repository**
+
+1. Make the main branch a protected branch
+2. Under settings > Branches > Add branch protection rule
+3. Configure `require signed commits`
+4. Configure `require status checks`
+5. Save settings
+   
+**C. Set up automated code scanning using GitHub’s CodeQL code analysis tool on GitHub Actions.**
 
 
