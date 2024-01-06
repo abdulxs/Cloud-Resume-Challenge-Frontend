@@ -24,4 +24,7 @@ Steps taken to secure the software supply chain
    
 **C. Set up automated code scanning using GitHub’s CodeQL code analysis tool on GitHub Actions.**
 
+1.  Under Security > code scanning > configure scanning tool
+2.  Validated the settings and enabled CodeQL
+3.  ![image](https://github.com/abdulxs/Cloud-Resume-Challenge-Frontend/assets/18741380/8c363d27-71d0-4576-93ae-60db99f28e6b)
 
