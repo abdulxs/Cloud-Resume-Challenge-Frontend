@@ -28,3 +28,8 @@ Steps taken to secure the software supply chain
 2.  Validated the settings and enabled CodeQL
 3.  ![image](https://github.com/abdulxs/Cloud-Resume-Challenge-Frontend/assets/18741380/8c363d27-71d0-4576-93ae-60db99f28e6b)
 
+**D. Generate an SBOM (Software Bill of Materials)**
+
+1. Install Syft on MacOs `curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin` then `brew install syft`
+2. generate an SBOM from my source directory `syft path/to/dir -o syft-json`
+
