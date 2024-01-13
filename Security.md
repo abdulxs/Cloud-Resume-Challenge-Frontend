@@ -33,3 +33,13 @@ Steps taken to secure the software supply chain
 1. Install Syft on MacOs `curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin` then `brew install syft`
 2. generate an SBOM from my source directory `syft path/to/dir -o syft-json`
 
+
+D. Configure code-signing into Infrastructure as Code definition for API in AWS Lambda
+
+1. create signing profile on AWS Code Signer
+2. Start signing job
+3. Add code-sign ARN to Repository secrets
+4. Declare code-sign resource in AWS SAM template and parametrize the ARN
+5. Reference repository secret for Code-sign ARN in Workflow file in the SAM build step
+6. Confirm code-signing is present on AWS Lambda via comnsole or CLI 
+
